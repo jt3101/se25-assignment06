@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
  */
 @Data
 @Builder(toBuilder = true)
-// @RequiredArgsConstructor
-// @AllArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Review implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L; // required to clone objects (see TestFixtures class).

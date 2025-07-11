@@ -43,6 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
         List<Review> reviews = reviewDataService.getByPos(pos);
         List<Review> approvedList = reviews.stream()
                 .filter(review -> review.getApprovalCount() >= 2)
+                .filter(review -> review.getPos().equals(pos))
                 .collect(Collectors.toList());
         return approvedList;
     }
@@ -58,6 +59,7 @@ public class ReviewServiceImpl implements ReviewService {
     public Review approve(@NonNull Review review, @NonNull User user)
             throws ReviewNotFoundException, UserNotFoundException, IllegalArgumentException {
         if (user.getId() != review.getAuthor().getId()) {
+            review.setApprovalCount(review.getApprovalCount() + 1);
             return reviewDataService.approve(review);
         }
         return review;
